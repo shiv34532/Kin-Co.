@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kin & Co. | Premium Modern Family Store</title>
+    
+    <!-- SEO Optimization -->
+    <meta name="description" content="Explore Kin & Co., a beautifully designed modern lifestyle store for parents, children, and pets. Discover organic clothing, toys, home goods, and family experiences.">
+    <meta name="keywords" content="family store, organic baby toys, modern home goods, pet accessories, matching pajamas, designer games">
+    <meta property="og:title" content="Kin & Co. | Premium Modern Family Store">
+    <meta property="og:description" content="Discover organic clothing, wooden toys, stoneware goods, and home accessories for the entire modern family.">
+    <meta property="og:image" content="assets/hero.png">
+    <meta property="og:type" content="website">
+
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-link" onclick="switchTab('shop'); return false;">
+                <i class="fas fa-seedling" style="color: var(--primary); font-size: 1.5rem;"></i>
+                <span class="logo-text">Kin & Co.</span>
+            </a>
+
+            <!-- SPA Navigation Links -->
+            <nav class="main-navigation">
+                <a href="#" class="nav-link active" id="tab-shop" onclick="switchTab('shop'); return false;">Shop</a>
+                <a href="#" class="nav-link" id="tab-about" onclick="switchTab('about'); return false;">About Us</a>
+                <a href="#" class="nav-link" id="tab-support" onclick="switchTab('support'); return false;">Support</a>
+            </nav>
+            
+            <div class="search-bar-container">
+                <span class="search-icon"><i class="fas fa-search"></i></span>
+                <input type="text" class="search-input" id="search-input" placeholder="Search modern family essentials..." aria-label="Search products">
+            </div>
+            
+            <div class="nav-actions">
+                <!-- Currency Selector -->
+                <div class="currency-wrapper">
+                    <select class="currency-select" id="currency-select" aria-label="Select Currency">
+                        <option value="USD">USD ($)</option>
+                        <option value="INR">INR (₹)</option>
+                    </select>
+                </div>
+
+                <button class="nav-btn" id="theme-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- Firebase Account Button -->
+                <button class="nav-btn" id="auth-btn" aria-label="User Account" onclick="openAuthModal()">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="auth-status-dot" id="auth-status-dot"></span>
+                </button>
+
+                <button class="nav-btn" id="cart-btn" aria-label="Open Shopping Bag">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+        
+        <!-- SECTION 1: SHOP (DEFAULT) -->
+        <div id="section-shop" class="spa-section active">
+            
+            <!-- Hero Banner Carousel -->
+            <section class="hero-carousel-container" id="hero-carousel">
+                <div class="hero-track">
+                    
+                    <!-- Slide 1: Welcome -->
+                    <div class="hero-slide active">
+                        <img src="assets/hero.png" alt="Happy family in a modern warm home scene" class="hero-image">
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <span class="hero-subtitle">Est. 2026</span>
+                            <h1 class="hero-title">Modern Goods for the Whole Family</h1>
+                            <p class="hero-description">Beautifully crafted, sustainable essentials for parents, children, and pets. Curated for cozy and aesthetic homes.</p>
+                            <a href="#products-anchor" class="hero-cta">Explore Collection <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Parents Promo -->
+                    <div class="hero-slide">
+                        <img src="assets/parents.png" alt="Modern parental lifestyle ceramics" class="hero-image">
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <span class="hero-subtitle">Special Offer</span>
+                            <h1 class="hero-title">Start Mornings Together</h1>
+                            <p class="hero-description">Enjoy 15% off our parents stoneware, mugs, and cozy throws. Crafted by local artisans for pure relaxation.</p>
+                            <a href="#" onclick="document.querySelector('[data-category=parents]').click(); document.getElementById('products-anchor').scrollIntoView(); return false;" class="hero-cta">Shop Parents Collection <i class="fas fa-percent"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Kids Toys -->
+                    <div class="hero-slide">
+                        <img src="assets/kids.png" alt="Aesthetic wooden toys and nursery layout" class="hero-image">
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <span class="hero-subtitle">Organic Playtime</span>
+                            <h1 class="hero-title">Creative Play, Safely Crafted</h1>
+                            <p class="hero-description">Our non-toxic wooden blocks and cars promote imaginative learning. Free shipping on all kids toys today!</p>
+                            <a href="#" onclick="document.querySelector('[data-category=kids]').click(); document.getElementById('products-anchor').scrollIntoView(); return false;" class="hero-cta">Shop Toys & Play <i class="fas fa-child"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-control prev" onclick="moveSlide(-1)" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-control next" onclick="moveSlide(1)" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="setSlide(0)"></span>
+                    <span class="dot" onclick="setSlide(1)"></span>
+                    <span class="dot" onclick="setSlide(2)"></span>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section class="categories-section" id="categories-section">
+                <h2 class="section-title">Shop by Category</h2>
+                <div class="categories-container">
+                    <div class="category-card" onclick="document.querySelector('[data-category=parents]').click(); document.getElementById('products-anchor').scrollIntoView();">
+                        <img src="assets/parents.png" alt="Parents lifestyle goods">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Parents</h3>
+                            <span class="category-count">Explore Essentials</span>
+                        </div>
+                    </div>
+                    <div class="category-card" onclick="document.querySelector('[data-category=kids]').click(); document.getElementById('products-anchor').scrollIntoView();">
+                        <img src="assets/kids.png" alt="Kids wooden toys">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Kids & Babies</h3>
+                            <span class="category-count">Organic Playtime</span>
+                        </div>
+                    </div>
+                    <div class="category-card" onclick="document.querySelector('[data-category=pets]').click(); document.getElementById('products-anchor').scrollIntoView();">
+                        <img src="assets/pets.png" alt="Family pet accessories">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Pets</h3>
+                            <span class="category-count">Cozy Companions</span>
+                        </div>
+                    </div>
+                    <div class="category-card" onclick="document.querySelector('[data-category=experiences]').click(); document.getElementById('products-anchor').scrollIntoView();">
+                        <img src="assets/product_board_game.png" alt="Family board game">
+                        <div class="category-overlay">
+                            <h3 class="category-name">Experiences</h3>
+                            <span class="category-count">Shared Moments</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div id="products-anchor" style="padding-top: 1rem;"></div>
+
+            <!-- Products Section with Compound Filters Sidebar -->
+            <section class="products-section" id="products-section">
+                <div class="products-header">
+                    <h2 class="section-title" style="margin-bottom: 0;">Featured Essentials</h2>
+                    
+                    <div class="sort-container">
+                        <label for="sort-select" style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);">Sort By:</label>
+                        <select class="sort-select" id="sort-select">
+                            <option value="default">Default</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Top Rated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="shop-layout">
+                    <!-- Filters Sidebar -->
+                    <aside class="filters-sidebar">
+                        <div class="filter-group">
+                            <h3 class="filter-title">Category</h3>
+                            <div class="filter-pills-vertical">
+                                <button class="filter-pill active" data-category="all">All Items</button>
+                                <button class="filter-pill" data-category="parents">Parents</button>
+                                <button class="filter-pill" data-category="kids">Kids & Babies</button>
+                                <button class="filter-pill" data-category="pets">Pets</button>
+                                <button class="filter-pill" data-category="clothing">Clothing</button>
+                                <button class="filter-pill" data-category="experiences">Experiences</button>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h3 class="filter-title">Price Range</h3>
+                            <div class="filter-options">
+                                <label class="checkbox-container">
+                                    <input type="radio" name="price-range" value="all" checked onclick="setPriceFilter('all')">
+                                    <span class="checkmark"></span> All Prices
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="radio" name="price-range" value="under-1500" onclick="setPriceFilter('under-1500')">
+                                    <span class="checkmark"></span> Under <span class="price-range-lbl" data-usd="20">₹1,670</span>
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="radio" name="price-range" value="1500-3500" onclick="setPriceFilter('1500-3500')">
+                                    <span class="checkmark"></span> <span class="price-range-lbl" data-usd="20">₹1,670</span> - <span class="price-range-lbl" data-usd="45">₹3,758</span>
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="radio" name="price-range" value="over-3500" onclick="setPriceFilter('over-3500')">
+                                    <span class="checkmark"></span> Over <span class="price-range-lbl" data-usd="45">₹3,758</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <h3 class="filter-title">Minimum Rating</h3>
+                            <div class="filter-options">
+                                <label class="checkbox-container">
+                                    <input type="radio" name="rating-filter" value="all" checked onclick="setRatingFilter('all')">
+                                    <span class="checkmark"></span> Show All
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="radio" name="rating-filter" value="4.8" onclick="setRatingFilter(4.8)">
+                                    <span class="checkmark"></span> 4.8★ & Above
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="radio" name="rating-filter" value="4.6" onclick="setRatingFilter(4.6)">
+                                    <span class="checkmark"></span> 4.6★ & Above
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="reset-all-filters-btn" onclick="resetFilters()">Reset All Filters</button>
+                    </aside>
+
+                    <!-- Dynamic Product Grid -->
+                    <div class="products-grid-wrapper">
+                        <div class="products-grid" id="products-grid">
+                            <!-- Injected dynamically via app.js -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SECTION 2: ABOUT US -->
+        <div id="section-about" class="spa-section">
+            <section class="about-us-container">
+                <div class="about-us-header">
+                    <span class="about-subtitle">Our Story</span>
+                    <h2 class="about-title">Slowing down. Crafting memories.</h2>
+                </div>
+                <div class="about-us-grid">
+                    <div class="about-content-side">
+                        <p class="about-text">At Kin & Co., our philosophy is simple: we believe that family rituals are the thread of a happy home. Founded in 2026, we noticed a gap in high-quality, modern, and sustainable options that cater to the **entire** family—from parent self-care to child exploration and pet companionship.</p>
+                        <p class="about-text">We focus on clean lines, organic textures, and materials that look gorgeous in your living spaces. No bright plastic, no toxic chemicals. Just beautiful wood, hand-glazed ceramic, and organic cotton fabrics crafted to survive generations of love.</p>
+                        
+                        <div class="value-pillars">
+                            <div class="pillar">
+                                <i class="fas fa-heart-circle-check"></i>
+                                <div>
+                                    <h4>Family Centered</h4>
+                                    <p>Products designed to bring people together, matching sets, and cooperative play.</p>
+                                </div>
+                            </div>
+                            <div class="pillar">
+                                <i class="fas fa-leaf"></i>
+                                <div>
+                                    <h4>Sustainable & Safe</h4>
+                                    <p>100% GOTS cotton, natural wax varnishes, lead-free ceramics, and zero waste packaging.</p>
+                                </div>
+                            </div>
+                            <div class="pillar">
+                                <i class="fas fa-palette"></i>
+                                <div>
+                                    <h4>Modern Aesthetics</h4>
+                                    <p>Carefully selected neutral-toned, earth-colored, and Scandinavian interior designs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-img-side">
+                        <img src="assets/hero.png" alt="Our living room aesthetic" class="about-hero-img">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SECTION 3: SUPPORT -->
+        <div id="section-support" class="spa-section">
+            <section class="support-container">
+                <div class="support-header">
+                    <span class="about-subtitle">Help Center</span>
+                    <h2 class="about-title">Support & FAQ</h2>
+                    <p class="support-desc">Have a question about sizing, organic care, or your order status? We are here to help your family.</p>
+                </div>
+                
+                <div class="support-grid">
+                    <!-- Contact Form -->
+                    <div class="support-form-side">
+                        <h3 class="support-section-title">Send Us a Message</h3>
+                        <form id="contact-form" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="contact-name">Family Representative Name</label>
+                                <input type="text" id="contact-name" class="form-input" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email Address</label>
+                                <input type="email" id="contact-email" class="form-input" placeholder="email@domain.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">How can we support your home?</label>
+                                <textarea id="contact-message" class="form-input" rows="5" placeholder="Write message..." required></textarea>
+                            </div>
+                            <button type="submit" class="support-submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+
+                    <!-- FAQ Accordions -->
+                    <div class="support-faq-side">
+                        <h3 class="support-section-title">Frequently Asked Questions</h3>
+                        
+                        <div class="faq-accordion">
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)">
+                                    Are your wooden toys finished with non-toxic oils?
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Yes, all wooden building blocks and cars are handcrafted using sustainably harvested beech/cherry wood and colored with lead-free, non-toxic water-based glazes. They are finished with organic beeswax for protection.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)">
+                                    How does the free shipping over ₹6,200 ($75) work?
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Free standard shipping is applied automatically at checkout to orders totaling $75 or ₹6,260 and above before tax. Delivery typically takes 3-5 business days.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)">
+                                    What is your return/refund policy?
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>As per our terms and conditions, all sales are final. We do not accept returns, exchanges, or cancellations once an order has been placed. Please review your order carefully before checking out.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)">
+                                    Do your matching pajamas shrink?
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Our pajamas are woven from 100% GOTS certified organic cotton and are pre-shrunk in manufacturing. We recommend cold gentle machine washing and drying flat to preserve fibers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+    </main>
+
+    <!-- Off-canvas Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cart-drawer-overlay">
+        <div class="cart-drawer">
+            <div class="cart-header">
+                <h3 style="font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-shopping-bag" style="color: var(--primary);"></i> Your Bag
+                </h3>
+                <button class="cart-close-btn" id="cart-close-btn" aria-label="Close cart">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="cart-items-container" id="cart-items-container">
+                <!-- Cart items rendered dynamically -->
+            </div>
+
+            <div class="cart-footer">
+                <div class="cart-summary-line">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal-val">$0.00</span>
+                </div>
+                <div class="cart-summary-line">
+                    <span>Shipping</span>
+                    <span id="cart-shipping-val">$0.00</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-align: right;" id="free-shipping-note">Free shipping on orders over $75.00</p>
+                <div class="cart-summary-line total">
+                    <span>Total</span>
+                    <span id="cart-total-val">$0.00</span>
+                </div>
+                
+                <button class="checkout-btn" id="checkout-btn">
+                    Proceed to Checkout <i class="fas fa-lock"></i>
+                </button>
+                <p style="font-size: 0.75rem; color: var(--primary); text-align: center; margin-top: 0.6rem; font-weight: 600;"><i class="fas fa-info-circle"></i> Terms: All sales final. No returns accepted.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Authentication Modal -->
+    <div class="modal-overlay" id="auth-modal-overlay">
+        <div class="modal-content" style="max-width: 420px;">
+            <button class="modal-close-btn" onclick="closeAuthModal()" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <!-- Auth Modal Tabs -->
+            <div class="auth-modal-wrapper">
+                <div class="auth-tabs">
+                    <button class="auth-tab-btn active" id="auth-tab-login" onclick="switchAuthTab('login')">Login</button>
+                    <button class="auth-tab-btn" id="auth-tab-signup" onclick="switchAuthTab('signup')">Sign Up</button>
+                </div>
+
+                <div class="auth-forms-container">
+                    
+                    <!-- Config Settings Indicator (for Developer connection) -->
+                    <div class="auth-config-toggle" onclick="toggleFirebaseConfigPanel()">
+                        <i class="fas fa-cog"></i> Firebase Sandbox Mode active (Click to configure keys)
+                    </div>
+                    
+                    <div id="firebase-config-panel" class="firebase-config-panel">
+                        <h4>Firebase Config Parameters</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">Input your Firebase config JSON to connect to a real Firebase auth database.</p>
+                        <textarea id="firebase-config-json" placeholder='{ "apiKey": "...", "authDomain": "..." }'></textarea>
+                        <button type="button" class="apply-config-btn" onclick="saveFirebaseConfig()">Connect Project</button>
+                    </div>
+
+                    <div id="auth-alert" class="auth-alert"></div>
+
+                    <!-- 1. LOGIN FORM -->
+                    <form id="login-form" onsubmit="handleLoginSubmit(event)">
+                        <div class="form-group">
+                            <label for="login-email">Email Address</label>
+                            <input type="email" id="login-email" class="form-input" placeholder="yourname@domain.com" required autocomplete="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                        </div>
+                        <button type="submit" class="auth-submit-btn">Login <i class="fas fa-sign-in-alt"></i></button>
+                    </form>
+
+                    <!-- 2. SIGN UP FORM -->
+                    <form id="signup-form" onsubmit="handleSignupSubmit(event)" style="display: none;">
+                        <div class="form-group">
+                            <label for="signup-name">Display Name</label>
+                            <input type="text" id="signup-name" class="form-input" placeholder="Your name" required autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email">Email Address</label>
+                            <input type="email" id="signup-email" class="form-input" placeholder="yourname@domain.com" required autocomplete="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">Password (min 6 characters)</label>
+                            <input type="password" id="signup-password" class="form-input" placeholder="••••••••" required minlength="6" autocomplete="new-password">
+                        </div>
+                        <button type="submit" class="auth-submit-btn">Create Account <i class="fas fa-user-plus"></i></button>
+                    </form>
+
+                    <!-- 3. LOGGED IN / PROFILE STATE -->
+                    <div id="auth-profile-state" style="display: none;" class="auth-profile-state">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 class="profile-name" id="profile-display-name">Hello, Family Member!</h3>
+                        <p class="profile-email" id="profile-display-email">email@domain.com</p>
+                        
+                        <div class="profile-meta">
+                            <span>Status: Connected</span>
+                            <span id="auth-mode-label">Mode: Sandbox Simulation</span>
+                        </div>
+
+                        <button type="button" class="profile-logout-btn" onclick="handleLogout()">Sign Out <i class="fas fa-sign-out-alt"></i></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail / Success Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeModal()" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modal-wrapper">
+                <!-- Dynamic Quickview or Success Layout -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add to Cart Toast Notification -->
+    <div class="toast" id="toast-notification">
+        <span class="toast-icon"><i class="fas fa-check-circle"></i></span>
+        <span id="toast-message">Added to shopping bag!</span>
+    </div>
+
+    <!-- Premium Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo-link" onclick="switchTab('shop'); return false;">
+                    <i class="fas fa-seedling" style="color: var(--primary); font-size: 1.5rem;"></i>
+                    <span class="logo-text">Kin & Co.</span>
+                </a>
+                <p class="footer-description">Creating heirloom-quality, sustainable goods for everyday family rituals. We believe in minimal design, cozy spaces, and thoughtful interactions.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="footer-col-title">Collection</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="switchTab('shop'); document.querySelector('[data-category=parents]').click(); return false;">For Parents</a></li>
+                    <li><a href="#" onclick="switchTab('shop'); document.querySelector('[data-category=kids]').click(); return false;">For Kids & Babies</a></li>
+                    <li><a href="#" onclick="switchTab('shop'); document.querySelector('[data-category=pets]').click(); return false;">For Pets</a></li>
+                    <li><a href="#" onclick="switchTab('shop'); document.querySelector('[data-category=clothing]').click(); return false;">Family Clothing</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="footer-col-title">Our Values</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="switchTab('about'); return false;">Organic Cotton</a></li>
+                    <li><a href="#" onclick="switchTab('about'); return false;">Sustainably Harvested Wood</a></li>
+                    <li><a href="#" onclick="switchTab('about'); return false;">Ethical Production</a></li>
+                    <li><a href="#" onclick="switchTab('about'); return false;">Giving Back</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="footer-col-title">Customer Care</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="switchTab('support'); return false;">Shipping & Policy</a></li>
+                    <li><a href="#" onclick="switchTab('support'); return false;">Sizing & Care Guide</a></li>
+                    <li><a href="#" onclick="switchTab('support'); return false;">Contact Us</a></li>
+                    <li><a href="#" onclick="switchTab('support'); return false;">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kin & Co. All rights reserved. Crafted with care for the modern family.</p>
+            <p style="display: flex; gap: 1rem;">
+                <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+                <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Firebase compat packages CDN libraries -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+    <!-- Razorpay Checkout SDK Standard Integration -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
